@@ -37,12 +37,12 @@ DECKS = 1
 def main():
     count = 0
     user_input = True
-    nb_cards = 52 * DECKS
+    nb_cards = 0
     while user_input:
         card = input('CARD >> ')
         card = card.upper()
         count += BASIC_HI_LO[CARD_NAME[card]]
-        nb_cards = nb_cards - 1
+        nb_cards = nb_cards + 1
         print('COUNT: {}'.format(count))
         print('NB CARDS: {}'.format(nb_cards))
 
