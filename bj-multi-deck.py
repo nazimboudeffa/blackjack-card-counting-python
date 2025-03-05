@@ -57,7 +57,7 @@ def main():
         if not card_exists:
             DECKS[-1].append(card)
             for deck in DECKS:
-                print(deck)
+                print(sorted(deck))
         else:
             print('CARD ALREADY USED')
 
