@@ -32,7 +32,7 @@ BASIC_REVERSES = {"Ace": -1, "Two": -1, "Three": -1, "Four": -2, "Five": -2, "Si
 BASIC_ACE_FIVE = {"Ace": -1, "Two": 1, "Three": 1, "Four": 1, "Five": 1, "Six": 1, "Seven": 0, "Eight": 0, "Nine": 0, "Ten": -1, "Jack": -1, "Queen": -1, "King": -1}
 BASIC_COUNT = {"Ace": -1, "Two": 1, "Three": 1, "Four": 1, "Five": 1, "Six": 1, "Seven": 0, "Eight": 0, "Nine": 0, "Ten": -1, "Jack": -1, "Queen": -1, "King": -1}
 
-DECKS = 1
+DECKS = [[]]
 
 #black spades S (♠), red hearts H (♥), black diamonds D (♦), and red clubs C (♣)
 CARDS = {(figure, color) for figure in CARD_NAME.keys() for color in ['H', 'D', 'C', 'S']}
@@ -40,24 +40,39 @@ CARDS = {(figure, color) for figure in CARD_NAME.keys() for color in ['H', 'D', 
 def main():
     count = 0
     user_input = True
-    nb_cards = 0
+    nb_cards_played = 0
     while user_input:
+        
         figure = input('FIGURE: 2...9, 10, J, Q, K >> ')
         figure = figure.upper()
-        count += BASIC_HI_LO[CARD_NAME[figure]]
         color = input('COLOR: S=♠, H=♥, D=♦, C=♣ >> ')
         card = (figure, color.upper())
-        if card in CARDS:
-            CARDS.remove(card)
+        print('COUNT: {}'.format(count))
+
+        count += BASIC_HI_LO[CARD_NAME[figure]]
+
+        # Check if card is in any of the decks
+        card_exists = any(card in deck for deck in DECKS)
+
+        if not card_exists:
+            DECKS[-1].append(card)
+            for deck in DECKS:
+                print(deck)
         else:
             print('CARD ALREADY USED')
-        nb_cards = nb_cards + 1
-        print('COUNT: {}'.format(count))
-        print('NB CARDS: {}'.format(nb_cards))
-        print('CARDS LEFT: {}'.format(sorted(CARDS)))
-        if nb_cards > 52:
-            DECKS += 1
-            print('DECKS: {}'.format(DECKS))
+
+        nb_cards_played += 1
+        print('NUMBER OF CARDS PLAYED: {}'.format(nb_cards_played))
+
+        if nb_cards_played > 52:
+            DECKS.append([])  # Add a new sublist for the new deck
+            nb_cards_played = 0  # Reset the card count for the new deck
+            print('NEW DECK CREATED')
+            print('DECKS: {}'.format(len(DECKS)))
+
+        # Calculate and print the true count
+        true_count = count / len(DECKS)
+        print('TRUE COUNT: {:.2f}'.format(true_count))
 
 if __name__ == '__main__':
     main()
