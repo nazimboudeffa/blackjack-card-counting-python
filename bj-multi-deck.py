@@ -68,7 +68,7 @@ def main():
             DECKS.append([])  # Add a new sublist for the new deck
             nb_cards_played = 0  # Reset the card count for the new deck
             print('NEW DECK CREATED')
-            print('DECKS: {}'.format(len(DECKS)))
+        print('DECKS: {}'.format(len(DECKS)))
 
         # Calculate and print the true count
         true_count = count / len(DECKS)
