@@ -47,9 +47,9 @@ def main():
         figure = figure.upper()
         color = input('COLOR: S=♠, H=♥, D=♦, C=♣ >> ')
         card = (figure, color.upper())
-        print('COUNT: {}'.format(count))
 
         count += BASIC_HI_LO[CARD_NAME[figure]]
+        print('COUNT: {}'.format(count))
 
         # Check if card is in any of the decks
         card_exists = any(card in deck for deck in DECKS)
