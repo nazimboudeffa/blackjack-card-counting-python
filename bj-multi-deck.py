@@ -54,12 +54,18 @@ def main():
         # Check if card is in any of the decks
         card_exists = any(card in deck for deck in DECKS)
 
-        if not card_exists:
-            DECKS[-1].append(card)
-            for deck in DECKS:
-                print(sorted(deck))
+        deck = DECKS[0]
+        if card in deck:
+            print('CARD ALREADY PLAYED IN DECK: '.i)
+
+        if card_exists:
+            print('CARD ALREADY PLAYED')
         else:
-            print('CARD ALREADY USED')
+            print('CARD NOT PLAYED')
+            for deck in DECKS:
+                if len(deck) < 52:
+                    deck.append(card)
+                    break
 
         nb_cards_played += 1
         print('NUMBER OF CARDS PLAYED: {}'.format(nb_cards_played))
