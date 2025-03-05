@@ -51,29 +51,22 @@ def main():
         count += BASIC_HI_LO[CARD_NAME[figure]]
         print('COUNT: {}'.format(count))
 
-        # Check if card is in any of the decks
-        card_exists = any(card in deck for deck in DECKS)
-
-        deck = DECKS[0]
-        if card in deck:
-            print('CARD ALREADY PLAYED IN DECK: '.i)
-
-        if card_exists:
-            print('CARD ALREADY PLAYED')
-        else:
-            print('CARD NOT PLAYED')
-            for deck in DECKS:
-                if len(deck) < 52:
-                    deck.append(card)
-                    break
-
         nb_cards_played += 1
         print('NUMBER OF CARDS PLAYED: {}'.format(nb_cards_played))
 
-        if nb_cards_played > 52:
-            DECKS.append([])  # Add a new sublist for the new deck
-            nb_cards_played = 0  # Reset the card count for the new deck
-            print('NEW DECK CREATED')
+        # Check if card is in any of the decks
+        card_exists = any(card in deck for deck in DECKS)
+
+        # If the card is not in any of the decks, add it to the first deck
+        for i in range(len(DECKS)):
+            if not card_exists:
+                DECKS[i].append(card)
+                break
+            else:
+                DECKS.append([])  # Add a new sublist for the new deck
+                DECKS[i].append(card)
+                break
+
         print('DECKS: {}'.format(len(DECKS)))
 
         # Calculate and print the true count
