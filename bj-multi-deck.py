@@ -54,20 +54,17 @@ def main():
         nb_cards_played += 1
         print('NUMBER OF CARDS PLAYED: {}'.format(nb_cards_played))
 
-        # Check if card is in any of the decks
-        card_exists = any(card in deck for deck in DECKS)
-
-        # If the card is not in any of the decks, add it to the first deck
-        for i in range(len(DECKS)):
-            if not card_exists:
+        for i in range(0, len(DECKS)):
+            if card not in DECKS[i]:
                 DECKS[i].append(card)
                 break
             else:
-                DECKS.append([])  # Add a new sublist for the new deck
-                DECKS[i].append(card)
+                DECKS.append([card])
                 break
-
+            
         print('DECKS: {}'.format(len(DECKS)))
+        for deck in DECKS:
+            print(sorted(deck))
 
         # Calculate and print the true count
         true_count = count / len(DECKS)
